@@ -8,6 +8,7 @@ This hub collects:
 
 - Practitioner-facing writing and frameworks
 - Conference and webinar sites
+- Media ecology and AI-video context for public-facing scholarship
 - District leadership briefs and public reports
 - Portfolio and publication pathways
 - Tools that support public writing or professional learning
