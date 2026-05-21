@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Micah Miner Writing Sites Hub</title>
+  <style>
+    :root {
+      --bg: #101415;
+      --panel: #171d1f;
+      --panel-2: #1e2628;
+      --ink: #f2efe7;
+      --muted: #aeb8b6;
+      --faint: #74807e;
+      --line: #2d383a;
+      --gold: #d6aa59;
+      --teal: #70b7ad;
+      --rose: #d88977;
+      --green: #97b980;
+      --blue: #8aa6d6;
+      --shadow: rgba(0,0,0,.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(16,20,21,.86), rgba(16,20,21,.96)),
+        radial-gradient(circle at 12% 12%, rgba(112,183,173,.18), transparent 35%),
+        radial-gradient(circle at 86% 5%, rgba(214,170,89,.13), transparent 32%),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    .page-shell { min-height: 100vh; }
+
+    header {
+      min-height: 72vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+      padding: clamp(2rem, 5vw, 5rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7vw, 6.7rem);
+      line-height: .9;
+      letter-spacing: 0;
+      margin: 0;
+      max-width: 10ch;
+      font-weight: 500;
+    }
+
+    h1 em { color: var(--teal); font-style: italic; }
+    .subtitle {
+      max-width: 68ch;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      margin: 1.4rem 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: .7rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.025);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .btn:hover, .btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--teal);
+      outline: none;
+    }
+
+    .btn.primary {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #08100f;
+    }
+
+    .hero-board {
+      position: relative;
+      min-height: 440px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        var(--panel);
+      box-shadow: 0 24px 80px var(--shadow);
+      overflow: hidden;
+      padding: 1.2rem;
+    }
+
+    .hero-board::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(180deg, black, transparent 88%);
+      pointer-events: none;
+    }
+
+    .visual-card {
+      position: absolute;
+      width: min(72%, 360px);
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 8px;
+      background: rgba(16,20,21,.9);
+      box-shadow: 0 18px 50px rgba(0,0,0,.28);
+      padding: 1rem;
+    }
+
+    .visual-card:nth-child(1) { top: 9%; left: 8%; border-top: 4px solid var(--teal); }
+    .visual-card:nth-child(2) { top: 36%; right: 7%; border-top: 4px solid var(--gold); }
+    .visual-card:nth-child(3) { bottom: 8%; left: 14%; border-top: 4px solid var(--rose); }
+    .visual-label {
+      color: var(--faint);
+      font-size: .66rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .visual-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.45rem;
+      line-height: 1;
+      margin: .45rem 0 .55rem;
+    }
+    .visual-line {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      margin-top: .45rem;
+    }
+    .visual-line.short { width: 62%; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: .6rem;
+      overflow-x: auto;
+      padding: .85rem clamp(1rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--line);
+      background: rgba(16,20,21,.92);
+      backdrop-filter: blur(14px);
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .55rem .75rem;
+      border: 1px solid transparent;
+      border-radius: 6px;
+    }
+    nav a:hover, nav a:focus-visible { color: var(--ink); border-color: var(--line); outline: none; }
+
+    main { padding: clamp(1rem, 4vw, 3rem); }
+    section { max-width: 1240px; margin: 0 auto; padding: 4rem 0; scroll-margin-top: 5rem; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 2rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1.4rem;
+      margin-bottom: 1.8rem;
+      align-items: end;
+    }
+    .section-kicker {
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1;
+      margin: 0;
+      font-weight: 500;
+    }
+    .lede {
+      max-width: 76ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(240px, .85fr) minmax(320px, 1.15fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .search-wrap, .route-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(23,29,31,.84);
+      padding: 1rem;
+    }
+    label span, .route-label {
+      display: block;
+      color: var(--faint);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .55rem;
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #0c1011;
+      color: var(--ink);
+      min-height: 44px;
+      padding: .7rem .85rem;
+      font: inherit;
+    }
+    input:focus { outline: 2px solid rgba(112,183,173,.45); border-color: var(--teal); }
+    .chips { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      padding: .5rem .7rem;
+      text-transform: uppercase;
+    }
+    .chip.active {
+      color: #07100f;
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 330px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      border-radius: 8px;
+      background: rgba(23,29,31,.86);
+      overflow: hidden;
+    }
+    .card[data-kind="Writing"] { border-top-color: var(--teal); }
+    .card[data-kind="Talks"] { border-top-color: var(--gold); }
+    .card[data-kind="Leadership"] { border-top-color: var(--blue); }
+    .card[data-kind="Tools"] { border-top-color: var(--green); }
+    .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+    .meta { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .75rem; }
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      padding: .26rem .5rem;
+      text-transform: uppercase;
+    }
+    .tag.live { color: var(--green); border-color: rgba(151,185,128,.45); }
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      line-height: 1.08;
+      margin: 0 0 .7rem;
+      font-weight: 500;
+    }
+    .card p { color: var(--muted); margin: 0 0 .9rem; }
+    .best-use {
+      color: var(--gold);
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      margin-top: auto;
+      text-transform: uppercase;
+    }
+    .card-actions { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1rem; }
+    .card-actions .btn { font-size: .7rem; min-height: 38px; padding: .55rem .75rem; }
+
+    .empty {
+      display: none;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      padding: 1rem;
+      text-align: center;
+    }
+    .empty.show { display: block; }
+
+    .pub-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .pub-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(23,29,31,.72);
+      padding: 1rem;
+    }
+    .pub-item h3 { font-size: 1.35rem; }
+    .pub-item a { color: var(--teal); font-weight: 800; text-decoration: none; }
+    .pub-item a:hover, .pub-item a:focus-visible { text-decoration: underline; outline: none; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      padding: 2rem clamp(1rem, 4vw, 3rem);
+      text-align: center;
+      font-size: .85rem;
+    }
+
+    @media (max-width: 960px) {
+      header, .controls, .section-head { grid-template-columns: 1fr; }
+      header { min-height: auto; }
+      .grid, .pub-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-board { min-height: 360px; }
+    }
+    @media (max-width: 640px) {
+      .grid, .pub-list { grid-template-columns: 1fr; }
+      .visual-card { width: 82%; }
+      header { padding: 2rem 1rem; }
+      main { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header>
+      <div>
+        <div class="eyebrow">Public Writing and Practitioner Scholarship</div>
+        <h1>Writing <em>Sites</em> Hub</h1>
+        <p class="subtitle">A public map of Micah Miner’s writing-adjacent GitHub Pages projects outside the qualifying-paper ecosystem: conference talks, practitioner decks, leadership briefs, screen-practice tools, and publication pathways.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#sites">Browse Sites</a>
+          <a class="btn" href="#publications">Publication Links</a>
+          <a class="btn" href="https://micahminer.com/projects/">MicahMiner.com Publications</a>
+        </div>
+      </div>
+      <div class="hero-board" aria-label="Writing site collage">
+        <div class="visual-card">
+          <div class="visual-label">Conference</div>
+          <div class="visual-title">AI Conference and Summer Presentation Decks</div>
+          <div class="visual-line"></div>
+          <div class="visual-line short"></div>
+        </div>
+        <div class="visual-card">
+          <div class="visual-label">Practitioner Framework</div>
+          <div class="visual-title">Pedagogical Friction for Real Classrooms</div>
+          <div class="visual-line"></div>
+          <div class="visual-line short"></div>
+        </div>
+        <div class="visual-card">
+          <div class="visual-label">Leadership Writing</div>
+          <div class="visual-title">Technology Briefs, Reviews, and Public Notes</div>
+          <div class="visual-line"></div>
+          <div class="visual-line short"></div>
+        </div>
+      </div>
+    </header>
+
+    <nav aria-label="Hub navigation">
+      <a href="#sites">Sites</a>
+      <a href="#publications">Publications</a>
+      <a href="#notes">Use</a>
+      <a href="https://minerclass.github.io/interactive-resume-2026/">Interactive Resume</a>
+    </nav>
+
+    <main>
+      <section id="sites">
+        <div class="section-head">
+          <div class="section-kicker">Catalog</div>
+          <h2>Writing, talks, and public scholarship sites.</h2>
+        </div>
+        <p class="lede">This hub intentionally excludes the qualifying-paper/dissertation companion suite. It gathers public-facing artifacts that support writing, professional learning, district technology leadership, and practitioner-facing scholarship.</p>
+
+        <div class="controls">
+          <label class="search-wrap">
+            <span>Search the collection</span>
+            <input id="searchInput" type="search" placeholder="Search AI, AAACS, social studies, leadership, friction, screens">
+          </label>
+          <div class="route-panel">
+            <div class="route-label">Filter by use</div>
+            <div class="chips" id="filters"></div>
+          </div>
+        </div>
+
+        <div class="grid" id="siteGrid"></div>
+        <div class="empty" id="emptyState">No matching sites. Try another filter or search term.</div>
+      </section>
+
+      <section id="publications">
+        <div class="section-head">
+          <div class="section-kicker">Writing Links</div>
+          <h2>Publication pathways from micahminer.com.</h2>
+        </div>
+        <p class="lede">These links point back to the writing and publication areas of the main website so this GitHub hub can function as a companion map, not a replacement for the publication archive.</p>
+        <div class="pub-list">
+          <article class="pub-item">
+            <h3>Publications and Writings</h3>
+            <p>Primary publication index for articles, guest posts, media appearances, and written projects.</p>
+            <a href="https://micahminer.com/projects/">Open publication page</a>
+          </article>
+          <article class="pub-item">
+            <h3>AI Goes to School</h3>
+            <p>Book and author pathway connected to practical AI integration, leadership, and classroom use.</p>
+            <a href="https://micahminer.com/">Open main site</a>
+          </article>
+          <article class="pub-item">
+            <h3>Blog and Recent Posts</h3>
+            <p>Current public writing on AI, education, technology leadership, digital citizenship, and social studies.</p>
+            <a href="https://micahminer.com/blog/">Open blog</a>
+          </article>
+          <article class="pub-item">
+            <h3>Interactive Resume</h3>
+            <p>Portfolio context for selected projects, presentations, and public scholarship.</p>
+            <a href="https://minerclass.github.io/interactive-resume-2026/">Open portfolio</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="notes">
+        <div class="section-head">
+          <div class="section-kicker">Boundary</div>
+          <h2>What belongs here.</h2>
+        </div>
+        <p class="lede">This page is for writing-adjacent public artifacts: professional talks, practitioner resources, leadership briefs, and portfolio links. Dissertation instruments, qualifying-paper companions, and research-methods pages belong in the Dissertation Sites Dashboard instead.</p>
+      </section>
+    </main>
+
+    <footer>
+      Micah J. Miner · Public writing, talks, and practitioner-scholarship sites · Updated May 2026
+    </footer>
+  </div>
+
+  <script>
+    const categories = ["All", "Writing", "Talks", "Leadership", "Tools"];
+    const sites = [
+      {
+        title: "When the Output Looks Like Learning",
+        kind: "Talks",
+        live: "https://minerclass.github.io/nlu_ai-ed-conference-pres26/",
+        repo: "https://github.com/minerclass/nlu_ai-ed-conference-pres26",
+        summary: "National Louis University virtual AI conference deck on tertiary algorithmicity, unproductive success, and pedagogical friction in K-12 schools.",
+        use: "Use as the AI conference anchor deck, separate from the social studies summer presentation pages.",
+        tags: ["NLU", "AI conference", "pedagogical friction", "virtual session"]
+      },
+      {
+        title: "Teaching Social Studies in the Age of AI",
+        kind: "Talks",
+        live: "https://minerclass.github.io/nlu_ai-ed-conference-pres26/social-studies/",
+        repo: "https://github.com/minerclass/nlu_ai-ed-conference-pres26/tree/main/social-studies",
+        summary: "Summer social studies presentation deck on generative AI, civic reasoning, C.O.R.E., H.E.A.R.T., and democratic learning.",
+        use: "Use for social studies-specific talks, summer workshops, and civic education writing.",
+        tags: ["social studies", "AI", "C.O.R.E.", "H.E.A.R.T."]
+      },
+      {
+        title: "The Frictionless Citizen",
+        kind: "Talks",
+        live: "https://minerclass.github.io/nlu_ai-ed-conference-pres26/aaacs-frictionless-citizen/",
+        repo: "https://github.com/minerclass/nlu_ai-ed-conference-pres26/tree/main/aaacs-frictionless-citizen",
+        summary: "AAACS conference session on civic agency, AI, and the danger of frictionless symbolic production in democratic education.",
+        use: "Use for AAACS conference follow-up, civic education writing, and social studies AI presentations.",
+        tags: ["AAACS", "social studies", "civic agency", "AI"]
+      },
+      {
+        title: "Pedagogical Importance of Friction",
+        kind: "Talks",
+        live: "https://minerclass.github.io/pedagogical-friction-iste-ascd-decks/iste-ew/",
+        repo: "https://github.com/minerclass/pedagogical-friction-iste-ascd-decks",
+        summary: "ISTE+ASCD expert webinar edition on protecting real learning when AI makes schoolwork easier to complete.",
+        use: "Use for practitioner-facing writing, webinar follow-up, or professional learning.",
+        tags: ["AI", "friction", "webinar", "ISTE ASCD"]
+      },
+      {
+        title: "Pedagogical Friction Practitioner Edition",
+        kind: "Writing",
+        live: "https://minerclass.github.io/pedagogical-friction-iste-ascd-decks/practitioner/",
+        repo: "https://github.com/minerclass/pedagogical-friction-iste-ascd-decks",
+        summary: "Practitioner-oriented version of the friction argument, framed for classroom and district use rather than dissertation review.",
+        use: "Use when translating scholarly ideas into educator-facing language.",
+        tags: ["practitioner", "AI", "learning", "friction"]
+      },
+      {
+        title: "Screen Practice Compass",
+        kind: "Tools",
+        live: "https://minerclass.github.io/screen-practice-compass/",
+        repo: "https://github.com/minerclass/screen-practice-compass",
+        summary: "Interactive tool that shifts screen-time conversations from minutes to the actual practices students rehearse on screens.",
+        use: "Use for writing and workshops about technology use, attention, and developmental practice.",
+        tags: ["screens", "practice", "families", "technology"]
+      },
+      {
+        title: "BPD3 Technology Department Review",
+        kind: "Leadership",
+        live: "https://minerclass.github.io/bpd3-tech-review/",
+        repo: "https://github.com/minerclass/bpd3-tech-review",
+        summary: "Public technology department review summarizing major wins, gains, infrastructure work, and strategic direction.",
+        use: "Use as a district leadership and operational writing artifact.",
+        tags: ["district", "technology", "review", "leadership"]
+      },
+      {
+        title: "BPD3 Board Meeting Dashboard",
+        kind: "Leadership",
+        live: "https://minerclass.github.io/bpd3-board-meeting-dashboard/",
+        repo: "https://github.com/minerclass/bpd3-board-meeting-dashboard",
+        summary: "Board-facing dashboard artifact for translating district work into readable public information.",
+        use: "Use as a governance, board communication, and public reporting sample.",
+        tags: ["board", "dashboard", "governance", "communication"]
+      },
+      {
+        title: "Interactive Resume and Selected Projects",
+        kind: "Writing",
+        live: "https://minerclass.github.io/interactive-resume-2026/",
+        repo: "https://github.com/minerclass/interactive-resume-2026",
+        summary: "Portfolio hub connecting public scholarship, leadership work, and selected interactive projects.",
+        use: "Use as the broad public entry point into the project ecosystem.",
+        tags: ["portfolio", "resume", "public scholarship", "projects"]
+      }
+    ];
+
+    let activeCategory = "All";
+    const filters = document.getElementById("filters");
+    const grid = document.getElementById("siteGrid");
+    const searchInput = document.getElementById("searchInput");
+    const emptyState = document.getElementById("emptyState");
+
+    function normalize(value) {
+      return String(value || "").toLowerCase();
+    }
+
+    function matches(site, query) {
+      const haystack = [site.title, site.kind, site.summary, site.use, site.tags.join(" ")].map(normalize).join(" ");
+      return haystack.includes(normalize(query));
+    }
+
+    function renderFilters() {
+      filters.innerHTML = categories.map((category) => {
+        return `<button class="chip ${category === activeCategory ? "active" : ""}" type="button" data-category="${category}" aria-pressed="${category === activeCategory}">${category}</button>`;
+      }).join("");
+    }
+
+    function renderSites() {
+      const query = searchInput.value.trim();
+      const visible = sites.filter((site) => {
+        const categoryMatch = activeCategory === "All" || site.kind === activeCategory;
+        return categoryMatch && matches(site, query);
+      });
+
+      emptyState.classList.toggle("show", visible.length === 0);
+      grid.innerHTML = visible.map((site, index) => `
+        <article class="card" data-kind="${site.kind}">
+          <div class="card-body">
+            <div class="meta">
+              <span class="tag live">Live</span>
+              <span class="tag">${String(index + 1).padStart(2, "0")}</span>
+              <span class="tag">${site.kind}</span>
+            </div>
+            <h3>${site.title}</h3>
+            <p>${site.summary}</p>
+            <div class="best-use">Best use</div>
+            <p>${site.use}</p>
+            <div class="meta">${site.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>
+            <div class="card-actions">
+              <a class="btn primary" href="${site.live}">Open site</a>
+              <a class="btn" href="${site.repo}">Open repo</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    filters.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+      activeCategory = button.dataset.category;
+      renderFilters();
+      renderSites();
+    });
+
+    searchInput.addEventListener("input", renderSites);
+    renderFilters();
+    renderSites();
+  </script>
+</body>
+</html>
