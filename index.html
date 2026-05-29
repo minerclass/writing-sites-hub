@@ -285,6 +285,17 @@
       border-radius: 8px;
       background: rgba(255,255,255,.025);
       padding: .65rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+    }
+
+    a.video-slot:hover,
+    a.video-slot:focus-visible {
+      border-color: rgba(209, 164, 91, .8);
+      background: rgba(209, 164, 91, .08);
+      outline: none;
+      transform: translateY(-1px);
     }
 
     .video-thumb {
@@ -566,14 +577,14 @@
               <p>A concise explanation can connect practitioner-facing work to the broader research trajectory while keeping qualifying-paper materials in their own hub.</p>
             </article>
           </div>
-          <aside class="video-shelf" aria-label="Future AI video shelf">
-            <h3>Future video shelf</h3>
-            <p>Reserved space for selected AI-created videos and short explanations once the collection is ready.</p>
+          <aside class="video-shelf" aria-label="Videos">
+            <h3>Videos</h3>
+            <p>Selected video resources and short explanations that extend the writing without replacing the argument.</p>
             <div class="video-slots">
-              <div class="video-slot">
+              <a class="video-slot" href="https://drive.google.com/drive/folders/1K9mdlzvLF5HNgUb3sESOGXZeGVMmTLwA" target="_blank" rel="noopener">
                 <div class="video-thumb">01</div>
-                <div><strong>Ong primer</strong><span>Media ecology overview</span></div>
-              </div>
+                <div><strong>Ong Primer</strong><span>Media ecology overview · Google Drive folder</span></div>
+              </a>
               <div class="video-slot">
                 <div class="video-thumb">02</div>
                 <div><strong>AI and symbolic work</strong><span>Research explanation</span></div>
