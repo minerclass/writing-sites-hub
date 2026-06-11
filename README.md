@@ -15,6 +15,10 @@ This hub collects:
 
 Dissertation instruments, qualifying-paper companions, and research-methods pages belong in the Dissertation Sites Dashboard instead.
 
+## Related public hub
+
+- [Conference Presentations](https://minerclass.github.io/conference-presentations/)
+
 ## Local Preview
 
 Open `index.html` directly, or serve the workspace root locally and visit:
