@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Micah Miner Writing Sites Hub</title>
+  <meta name="description" content="A public hub for Micah Miner's writing, talks, leadership resources, and practitioner-facing scholarship.">
+  <meta property="og:title" content="Micah Miner Writing Sites Hub">
+  <meta property="og:description" content="Public writing, talks, leadership resources, and practitioner-facing scholarship on education, technology, and AI.">
+  <meta property="og:type" content="website">
   <style>
     :root {
       --bg: #101415;
@@ -495,6 +499,7 @@
         <p class="subtitle">A public map of Micah Miner's writing-adjacent GitHub Pages projects outside the qualifying-paper ecosystem: conference talks, practitioner decks, leadership briefs, screen-practice tools, and publication pathways.</p>
         <div class="hero-actions">
           <a class="btn primary" href="#sites">Browse Collection</a>
+          <a class="btn" href="https://micahminer.com/summer-research-series/">Summer Research Series</a>
           <a class="btn" href="#research-context">Research Context</a>
           <a class="btn" href="https://minerclass.github.io/conference-presentations/">Conference Presentations</a>
           <a class="btn" href="https://micahminer.com/projects/">MicahMiner.com Publications</a>
@@ -647,6 +652,16 @@
   <script>
     const categories = ["All", "Writing", "Talks", "Leadership", "Tools"];
     const sites = [
+      {
+        title: "Designing with Friction: Summer Research Series",
+        kind: "Writing",
+        live: "https://micahminer.com/summer-research-series/",
+        secondary: "https://micahminer.com/consulting/",
+        secondaryLabel: "Speaking and consulting",
+        summary: "A public research-to-practice writing sequence on generative AI, durable learning, assessment, and K-12 leadership.",
+        use: "Follow the 10-week Summer 2026 sequence and connect its practical frameworks to speaking, workshops, and leadership conversations.",
+        tags: ["summer series", "generative AI", "durable learning", "assessment", "K-12 leadership"]
+      },
       {
         title: "Keeper of the Word",
         kind: "Tools",
@@ -805,7 +820,7 @@
             <div class="meta">${site.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>
             <div class="card-actions">
               <a class="btn primary" href="${site.live}">Open site</a>
-              <a class="btn" href="${site.repo}">Open repo</a>
+              <a class="btn" href="${site.secondary || site.repo}">${site.secondaryLabel || "Open repo"}</a>
             </div>
           </div>
         </article>
