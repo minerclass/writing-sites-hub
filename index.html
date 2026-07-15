@@ -468,6 +468,29 @@
     .pub-item a { color: var(--teal); font-weight: 800; text-decoration: none; }
     .pub-item a:hover, .pub-item a:focus-visible { text-decoration: underline; outline: none; }
 
+    .press-quote {
+      margin: 0 0 1.75rem;
+      padding: 1.5rem 1.75rem;
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      background: var(--panel-2);
+    }
+    .press-quote blockquote {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+      line-height: 1.35;
+      color: var(--ink);
+      margin: 0 0 .9rem;
+    }
+    .press-quote figcaption {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+    .press-quote figcaption cite { font-style: italic; }
+    .press-quote figcaption a { color: var(--teal); font-weight: 700; text-decoration: none; }
+    .press-quote figcaption a:hover, .press-quote figcaption a:focus-visible { text-decoration: underline; outline: none; }
+
     footer {
       border-top: 1px solid var(--line);
       color: var(--faint);
@@ -607,6 +630,32 @@
         </div>
       </section>
 
+      <section id="press">
+        <div class="section-head">
+          <div class="section-kicker">Press</div>
+          <h2>The vocabulary is traveling.</h2>
+        </div>
+        <p class="lede">In July 2026, EdSurge published a practitioner account of one school's response to generative AI and reached for <em>unproductive success</em> to name what it was seeing. The citation is worth noting less as press than as evidence: a concept built for the qualifying paper turned out to be useful to educators describing their own classrooms.</p>
+        <figure class="press-quote">
+          <blockquote>The students had technically succeeded while learning very little.</blockquote>
+          <figcaption>
+            Pattie Morales, attributing <em>unproductive success</em> to Miner &mdash; <cite>How My School Used Common Sense and Collaboration to Confront AI</cite>, <a href="https://www.edsurge.com/news/how-my-school-used-common-sense-and-collaboration-to-confront-ai">EdSurge</a>, July 15, 2026.
+          </figcaption>
+        </figure>
+        <div class="pub-list">
+          <article class="pub-item">
+            <h3>When the Output Looks Like Learning</h3>
+            <p>The source of record for <em>unproductive success</em> and tertiary algorithmicity. EdSurge cites the work under its qualifying-paper title, <em>Beyond Secondary Orality</em>; it was published in <em>i.e.: inquiry in education</em>, 18(1), Article 4.</p>
+            <a href="https://digitalcommons.nl.edu/ie/vol18/iss1/4">Read the article</a>
+          </article>
+          <article class="pub-item">
+            <h3>ISTE Expert Webinar</h3>
+            <p>The companion talk making the same argument for a practitioner audience: what generative AI changes about the symbolic environment of school, and why friction is the design response.</p>
+            <a href="https://minerclass.github.io/pedagogical-friction-iste-ascd-decks/iste-ew/#1">Open the deck</a>
+          </article>
+        </div>
+      </section>
+
       <section id="publications">
         <div class="section-head">
           <div class="section-kicker">Writing Links</div>
@@ -647,7 +696,7 @@
     </main>
 
     <footer>
-      Micah J. Miner - Public writing, talks, and practitioner-scholarship sites - Updated May 2026
+      Micah J. Miner - Public writing, talks, and practitioner-scholarship sites - Updated July 2026
     </footer>
   </div>
 
