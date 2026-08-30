@@ -7,6 +7,7 @@ Public-facing catalog for Micah Miner writing-adjacent GitHub Pages projects tha
 This hub collects:
 
 - Practitioner-facing writing and frameworks
+- Current public-scholarship companions, including *The Pouch and the Bypass*
 - Conference and webinar sites
 - Media ecology and AI-video context for public-facing scholarship
 - District leadership briefs and public reports
