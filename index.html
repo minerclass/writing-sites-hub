@@ -8,15 +8,22 @@
   <meta property="og:title" content="Micah Miner Writing Sites Hub">
   <meta property="og:description" content="Public writing, talks, leadership resources, and practitioner-facing scholarship on education, technology, and AI.">
   <meta property="og:type" content="website">
+  <link rel="stylesheet" href="https://minerclass.github.io/tokens.css">
   <style>
     :root {
-      --bg: #101415;
-      --panel: #171d1f;
-      --panel-2: #1e2628;
-      --ink: #f2efe7;
-      --muted: #aeb8b6;
+      /* Ground, ink, and rules come from the shared ecosystem tokens at
+         https://minerclass.github.io/tokens.css. Each fallback is the value this
+         page used before adopting them, so if that file ever fails to load the
+         page renders exactly as it did. Accents below stay local: shared ground,
+         own character. */
+      --bg: var(--mjm-bg, #101415);
+      --panel: var(--mjm-surface, #171d1f);
+      --panel-2: var(--mjm-surface-2, #1e2628);
+      --ink: var(--mjm-ink, #f2efe7);
+      --muted: var(--mjm-muted, #aeb8b6);
       --faint: #74807e;
-      --line: #2d383a;
+      --line: var(--mjm-line, #2d383a);
+      --mjm-accent: var(--mjm-teal, #70b7ad);
       --gold: #d6aa59;
       --teal: #70b7ad;
       --rose: #d88977;
