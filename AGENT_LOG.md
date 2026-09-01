@@ -6,6 +6,23 @@ or tokens.
 
 ---
 
+## 2026-08-31 - Fix a pre-existing contrast failure on faint text
+
+Found while probing every repo after CI caught a contrast regression elsewhere. This one
+**predates the token adoption**: it measured the same with the shared tokens disabled.
+
+`--faint` (`#74807e`) passed against the page ground at 4.54 but measured **4.21** against
+the panel surface, failing AA. It is used only as text - five `color:` declarations, no
+borders or fills - so lifting the value carries no other visual consequence.
+
+Lifted to `#828f8d`: **5.54** on the page ground and **5.14** on panels, still clearly
+dimmer than `--muted` so the visual hierarchy is preserved.
+
+**Verified.** 292 text-bearing elements probed: **zero** failures, down from five.
+Tightest remaining pair is 4.92 against 4.5.
+
+---
+
 ## 2026-08-31 - Adopt the shared ecosystem design tokens
 
 **Context.** A design review across 31 repositories found 27 distinct page backgrounds,

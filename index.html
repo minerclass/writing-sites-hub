@@ -21,7 +21,11 @@
       --panel-2: var(--mjm-surface-2, #1e2628);
       --ink: var(--mjm-ink, #f2efe7);
       --muted: var(--mjm-muted, #aeb8b6);
-      --faint: #74807e;
+      /* Lifted from #74807e, which measured 4.21 against the panel surface and
+         failed AA. Used only as text (five color: declarations, no borders or
+         fills), so lifting it is safe. Now 5.54 on the page ground and 5.14 on
+         panels, still clearly dimmer than --muted. */
+      --faint: #828f8d;
       --line: var(--mjm-line, #2d383a);
       --mjm-accent: var(--mjm-teal, #70b7ad);
       --gold: #d6aa59;
