@@ -6,6 +6,27 @@ or tokens.
 
 ---
 
+## 2026-09-10 - Register the PD365 Friction Audit workshop
+
+Added `pd365-friction-audit` to the `sites` array as `kind: "Talks"`, matching how the
+other session decks in this catalog are classified. Placed after the K-12 Device Policy
+Evidence Hub so the three device-policy projects sit together: the essay, the evidence
+base, and now the workshop built on both.
+
+`secondary` points at The Pouch and the Bypass, mirroring the evidence hub entry, because
+that essay is the argument these materials operationalize.
+
+**Verified.** Site count 16 to 17. Both `live` and `repo` URLs return 200. The entry
+carries every field the schema uses, so the card renders complete rather than with a
+missing summary or an absent secondary link.
+
+**Context worth knowing.** The workshop repository was created 2026-09-09 and its
+`AGENT_HANDOFF.md` documents a three-copy deck arrangement - committed source, generated
+participant build, published artifact - that nothing enforces the sync of. Read that
+before editing anything in that repo.
+
+---
+
 ## 2026-08-31 - Fix a pre-existing contrast failure on faint text
 
 Found while probing every repo after CI caught a contrast regression elsewhere. This one
