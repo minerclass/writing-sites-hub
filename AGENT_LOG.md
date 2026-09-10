@@ -6,6 +6,21 @@ or tokens.
 
 ---
 
+## 2026-09-10 - Register After the Ban
+
+Added the live After the Ban companion as a Writing card next to The Pouch and
+the Bypass. The card links to the companion and its repository source, describes
+the assessment examples and private agenda builder, and adds searchable leadership,
+assessment, access, and AI-governance tags. It makes no claim about manuscript
+acceptance or publication. Updated the README listing and footer month.
+
+Validation: executed the catalog script with a minimal DOM harness; confirmed all
+18 cards render, title search returns one match, the Writing filter retains the
+entry, and the companion URL appears in the generated card. Git whitespace checks
+passed.
+
+---
+
 ## 2026-09-10 - Point the Friction Audit entry at live registration
 
 PD365 published the event listing, so `secondary` now points there with the label
