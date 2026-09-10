@@ -6,6 +6,19 @@ or tokens.
 
 ---
 
+## 2026-09-10 - Point the Friction Audit entry at live registration
+
+PD365 published the event listing, so `secondary` now points there with the label
+"Register through PD365" instead of at the companion essay. The essay keeps its own
+entry in this catalog, so nothing was lost by the swap.
+
+**Note for whoever updates this next.** PD365 titled the listing "What Your Phone Policy
+Cannot Do: The Friction Audit" - inverted from the title used across the materials and in
+this catalog. Left as-is here because the materials are the thing being catalogued, but
+the two do differ.
+
+---
+
 ## 2026-09-10 - Register the PD365 Friction Audit workshop
 
 Added `pd365-friction-audit` to the `sites` array as `kind: "Talks"`, matching how the
