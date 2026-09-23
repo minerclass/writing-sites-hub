@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Micah Miner Writing Sites Hub</title>
+  <meta name="description" content="A public hub for Micah Miner's writing, talks, leadership resources, and practitioner-facing scholarship.">
+  <meta property="og:title" content="Micah Miner Writing Sites Hub">
+  <meta property="og:description" content="Public writing, talks, leadership resources, and practitioner-facing scholarship on education, technology, and AI.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="https://minerclass.github.io/tokens.css">
+  <style>
+    :root {
+      /* Ground, ink, and rules come from the shared ecosystem tokens at
+         https://minerclass.github.io/tokens.css. Each fallback is the value this
+         page used before adopting them, so if that file ever fails to load the
+         page renders exactly as it did. Accents below stay local: shared ground,
+         own character. */
+      --bg: var(--mjm-bg, #101415);
+      --panel: var(--mjm-surface, #171d1f);
+      --panel-2: var(--mjm-surface-2, #1e2628);
+      --ink: var(--mjm-ink, #f2efe7);
+      --muted: var(--mjm-muted, #aeb8b6);
+      /* Lifted from #74807e, which measured 4.21 against the panel surface and
+         failed AA. Used only as text (five color: declarations, no borders or
+         fills), so lifting it is safe. Now 5.54 on the page ground and 5.14 on
+         panels, still clearly dimmer than --muted. */
+      --faint: #828f8d;
+      --line: var(--mjm-line, #2d383a);
+      --mjm-accent: var(--mjm-teal, #70b7ad);
+      --gold: #d6aa59;
+      --teal: #70b7ad;
+      --rose: #d88977;
+      --green: #97b980;
+      --blue: #8aa6d6;
+      --shadow: rgba(0,0,0,.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(16,20,21,.86), rgba(16,20,21,.96)),
+        radial-gradient(circle at 12% 12%, rgba(112,183,173,.18), transparent 35%),
+        radial-gradient(circle at 86% 5%, rgba(214,170,89,.13), transparent 32%),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+    .page-shell { min-height: 100vh; }
+
+    header {
+      min-height: 62vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+      padding: clamp(2rem, 5vw, 4.5rem);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3rem, 7vw, 6.7rem);
+      line-height: .9;
+      letter-spacing: 0;
+      margin: 0;
+      max-width: 10ch;
+      font-weight: 500;
+    }
+
+    h1 em { color: var(--teal); font-style: italic; }
+    .subtitle {
+      max-width: 62ch;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      margin: 1.4rem 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: .7rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.025);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .btn:hover, .btn:focus-visible {
+      transform: translateY(-1px);
+      border-color: var(--teal);
+      outline: none;
+    }
+
+    .btn.primary {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #08100f;
+    }
+
+    .hero-board {
+      position: relative;
+      min-height: 390px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02)),
+        var(--panel);
+      box-shadow: 0 24px 80px var(--shadow);
+      overflow: hidden;
+      padding: 1.2rem;
+    }
+
+    .hero-board::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: linear-gradient(180deg, black, transparent 88%);
+      pointer-events: none;
+    }
+
+    .visual-card {
+      position: absolute;
+      width: min(72%, 360px);
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 8px;
+      background: rgba(16,20,21,.9);
+      box-shadow: 0 18px 50px rgba(0,0,0,.28);
+      padding: 1rem;
+    }
+
+    .visual-card:nth-child(1) { top: 9%; left: 8%; border-top: 4px solid var(--teal); }
+    .visual-card:nth-child(2) { top: 36%; right: 7%; border-top: 4px solid var(--gold); }
+    .visual-card:nth-child(3) { bottom: 8%; left: 14%; border-top: 4px solid var(--rose); }
+    .visual-label {
+      color: var(--faint);
+      font-size: .66rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .visual-title {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.35rem;
+      line-height: 1.05;
+      margin: .45rem 0 .55rem;
+    }
+    .visual-line {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      margin-top: .45rem;
+    }
+    .visual-line.short { width: 62%; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: .6rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: .85rem clamp(1rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--line);
+      background: rgba(16,20,21,.92);
+      backdrop-filter: blur(14px);
+    }
+
+    nav::-webkit-scrollbar { display: none; }
+
+    nav a {
+      flex: 0 0 auto;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .55rem .75rem;
+      border: 1px solid transparent;
+      border-radius: 6px;
+    }
+    nav a:hover, nav a:focus-visible { color: var(--ink); border-color: var(--line); outline: none; }
+
+    main { padding: clamp(1rem, 4vw, 3rem); }
+    section { max-width: 1240px; margin: 0 auto; padding: 4rem 0; scroll-margin-top: 5rem; }
+    .section-head {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 2rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 1.4rem;
+      margin-bottom: 1.8rem;
+      align-items: end;
+    }
+    .section-kicker {
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1;
+      margin: 0;
+      font-weight: 500;
+    }
+    .lede {
+      max-width: 76ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .research-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .research-copy, .video-shelf {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(23,29,31,.72);
+      padding: 1.1rem;
+    }
+
+    .research-copy {
+      display: grid;
+      gap: .85rem;
+    }
+
+    .research-note {
+      border-left: 3px solid var(--teal);
+      padding-left: .9rem;
+    }
+
+    .research-note:nth-child(2) { border-left-color: var(--gold); }
+    .research-note:nth-child(3) { border-left-color: var(--rose); }
+
+    .research-note h3, .video-shelf h3 {
+      font-size: 1.25rem;
+      margin-bottom: .45rem;
+    }
+
+    .research-note p, .video-shelf p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .video-slots {
+      display: grid;
+      gap: .65rem;
+      margin-top: 1rem;
+    }
+
+    .video-slot {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: .75rem;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.025);
+      padding: .65rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color .16s ease, background .16s ease, transform .16s ease;
+    }
+
+    a.video-slot:hover,
+    a.video-slot:focus-visible {
+      border-color: rgba(209, 164, 91, .8);
+      background: rgba(209, 164, 91, .08);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .video-thumb {
+      display: grid;
+      place-items: center;
+      aspect-ratio: 16 / 9;
+      border-radius: 6px;
+      background: linear-gradient(135deg, rgba(112,183,173,.22), rgba(214,170,89,.16));
+      color: var(--ink);
+      font-size: .7rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .video-slot strong {
+      display: block;
+      font-size: .9rem;
+      line-height: 1.2;
+    }
+
+    .video-slot span {
+      display: block;
+      color: var(--faint);
+      font-size: .78rem;
+      margin-top: .15rem;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(240px, .85fr) minmax(320px, 1.15fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .catalog-status {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      color: var(--faint);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      margin: 0 0 .85rem;
+      text-transform: uppercase;
+    }
+    .search-wrap, .route-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(23,29,31,.84);
+      padding: 1rem;
+    }
+    label span, .route-label {
+      display: block;
+      color: var(--faint);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: .55rem;
+    }
+    input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #0c1011;
+      color: var(--ink);
+      min-height: 44px;
+      padding: .7rem .85rem;
+      font: inherit;
+    }
+    input:focus { outline: 2px solid rgba(112,183,173,.45); border-color: var(--teal); }
+    .chips { display: flex; flex-wrap: wrap; gap: .55rem; }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.02);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      padding: .5rem .7rem;
+      text-transform: uppercase;
+    }
+    .chip.active {
+      color: #07100f;
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 300px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--teal);
+      border-radius: 8px;
+      background: rgba(23,29,31,.86);
+      overflow: hidden;
+    }
+    .card[data-kind="Writing"] { border-top-color: var(--teal); }
+    .card[data-kind="Talks"] { border-top-color: var(--gold); }
+    .card[data-kind="Leadership"] { border-top-color: var(--blue); }
+    .card[data-kind="Tools"] { border-top-color: var(--green); }
+    .card-body { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+    .meta { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: .75rem; }
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: .66rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      padding: .26rem .5rem;
+      text-transform: uppercase;
+    }
+    .tag.live { color: var(--green); border-color: rgba(151,185,128,.45); }
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.45rem;
+      line-height: 1.08;
+      margin: 0 0 .7rem;
+      font-weight: 500;
+    }
+    .card p { color: var(--muted); margin: 0 0 .9rem; }
+    .best-use {
+      color: var(--gold);
+      font-size: .68rem;
+      font-weight: 900;
+      letter-spacing: .12em;
+      margin-top: auto;
+      text-transform: uppercase;
+    }
+    .card-actions { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: 1rem; }
+    .card-actions .btn { font-size: .7rem; min-height: 38px; padding: .55rem .75rem; }
+
+    .empty {
+      display: none;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      padding: 1rem;
+      text-align: center;
+    }
+    .empty.show { display: block; }
+
+    .pub-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .pub-item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(23,29,31,.72);
+      padding: 1rem;
+    }
+    .pub-item h3 { font-size: 1.35rem; }
+    .pub-item a { color: var(--teal); font-weight: 800; text-decoration: none; }
+    .pub-item a:hover, .pub-item a:focus-visible { text-decoration: underline; outline: none; }
+
+    .press-quote {
+      margin: 0 0 1.75rem;
+      padding: 1.5rem 1.75rem;
+      border-left: 3px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      background: var(--panel-2);
+    }
+    .press-quote blockquote {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+      line-height: 1.35;
+      color: var(--ink);
+      margin: 0 0 .9rem;
+    }
+    .press-quote figcaption {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+    .press-quote figcaption cite { font-style: italic; }
+    .press-quote figcaption a { color: var(--teal); font-weight: 700; text-decoration: none; }
+    .press-quote figcaption a:hover, .press-quote figcaption a:focus-visible { text-decoration: underline; outline: none; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      padding: 2rem clamp(1rem, 4vw, 3rem);
+      text-align: center;
+      font-size: .85rem;
+    }
+    .hub-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.25rem;
+      margin: 0 0 0.9rem;
+    }
+    .hub-links a { color: inherit; }
+
+    @media (max-width: 960px) {
+      header, .controls, .section-head, .research-panel { grid-template-columns: 1fr; }
+      header { min-height: auto; }
+      .grid, .pub-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-board { min-height: 360px; }
+    }
+    @media (max-width: 640px) {
+      .grid, .pub-list { grid-template-columns: 1fr; }
+      .visual-card { width: 82%; }
+      header { padding: 2rem 1rem; }
+      main { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header>
+      <div>
+        <div class="eyebrow">Public Writing and Practitioner Scholarship</div>
+        <h1>Writing <em>Sites</em> Hub</h1>
+        <p class="subtitle">A public map of Micah Miner's writing-adjacent GitHub Pages projects outside the qualifying-paper ecosystem: conference talks, practitioner decks, leadership briefs, screen-practice tools, and publication pathways.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#sites">Browse Collection</a>
+          <a class="btn" href="https://minerclass.github.io/screen-time-wrong-question/pouch-and-bypass/">Fall 2026: The Pouch and the Bypass</a>
+          <a class="btn" href="https://micahminer.com/summer-research-series/">Summer Research Series</a>
+          <a class="btn" href="#research-context">Research Context</a>
+          <a class="btn" href="https://minerclass.github.io/conference-presentations/">Conference Presentations</a>
+          <a class="btn" href="https://minerclass.github.io/games-hub/">Learning Games Hub</a>
+          <a class="btn" href="https://micahminer.com/projects/">MicahMiner.com Publications</a>
+        </div>
+      </div>
+      <div class="hero-board" aria-label="Writing site collage">
+        <div class="visual-card">
+          <div class="visual-label">Talks</div>
+          <div class="visual-title">AI Conference and Summer Presentation Decks</div>
+          <div class="visual-line"></div>
+          <div class="visual-line short"></div>
+        </div>
+        <div class="visual-card">
+          <div class="visual-label">Writing</div>
+          <div class="visual-title">Pedagogical Friction for Real Classrooms</div>
+          <div class="visual-line"></div>
+          <div class="visual-line short"></div>
+        </div>
+        <div class="visual-card">
+          <div class="visual-label">Leadership Writing</div>
+          <div class="visual-title">Technology Briefs, Reviews, and Public Notes</div>
+          <div class="visual-line"></div>
+          <div class="visual-line short"></div>
+        </div>
+      </div>
+    </header>
+
+    <nav aria-label="Hub navigation">
+      <a href="#sites">Sites</a>
+      <a href="#research-context">Research Context</a>
+      <a href="#publications">Publications</a>
+      <a href="https://minerclass.github.io/conference-presentations/">Conference Presentations</a>
+      <a href="https://minerclass.github.io/games-hub/">Learning Games Hub</a>
+      <a href="#notes">Use</a>
+      <a href="https://minerclass.github.io/interactive-resume-2026/">Interactive Resume</a>
+    </nav>
+
+    <main>
+      <section id="sites">
+        <div class="section-head">
+          <div class="section-kicker">Catalog</div>
+          <h2>Writing, talks, and public scholarship sites.</h2>
+        </div>
+        <p class="lede">This hub intentionally excludes the qualifying-paper/dissertation companion suite. It gathers public-facing artifacts that support writing, professional learning, district technology leadership, and practitioner-facing scholarship.</p>
+
+        <div class="controls">
+          <label class="search-wrap">
+            <span>Search the collection</span>
+            <input id="searchInput" type="search" placeholder="Search AI, AAACS, social studies, leadership, friction, screens">
+          </label>
+          <div class="route-panel">
+            <div class="route-label">Filter by use</div>
+            <div class="chips" id="filters"></div>
+          </div>
+        </div>
+
+        <div class="catalog-status">
+          <span id="resultCount">Showing all sites</span>
+          <span>Live public artifacts</span>
+        </div>
+        <div class="grid" id="siteGrid"></div>
+        <div class="empty" id="emptyState">No matching sites. Try another filter or search term.</div>
+      </section>
+
+      <section id="research-context">
+        <div class="section-head">
+          <div class="section-kicker">Research Layer</div>
+          <h2>A cleaner home for Ong, AI video, and research context.</h2>
+        </div>
+        <p class="lede">This section gives the hub a place to grow without mixing it into the dissertation companion suite. It can hold a brief media ecology overview, selected AI-created videos, and a plain-language explanation of how the public writing connects to the larger research program.</p>
+        <div class="research-panel">
+          <div class="research-copy">
+            <article class="research-note">
+              <h3>Ong and Media Ecology</h3>
+              <p>A short overview can explain how orality, literacy, writing technologies, and electronic media shape memory, attention, dialogue, and schooling.</p>
+            </article>
+            <article class="research-note">
+              <h3>AI-Created Video Examples</h3>
+              <p>A curated shelf can collect short AI-generated explainers, reflection clips, or visual essays that extend the writing without replacing the argument.</p>
+            </article>
+            <article class="research-note">
+              <h3>Research Bridge</h3>
+              <p>A concise explanation can connect practitioner-facing work to the broader research trajectory while keeping qualifying-paper materials in their own hub.</p>
+            </article>
+          </div>
+          <aside class="video-shelf" aria-label="Videos">
+            <h3>Videos</h3>
+            <p>Selected video resources and short explanations that extend the writing without replacing the argument.</p>
+            <div class="video-slots">
+              <a class="video-slot" href="https://drive.google.com/file/d/17gKvbc1-P5EZhHldrikRtKBZpDtc9QiN/view?usp=sharing">
+                <div class="video-thumb">01</div>
+                <div><strong>Ong Primer</strong><span>Media ecology overview · Google Drive video</span></div>
+              </a>
+              <a class="video-slot" href="https://drive.google.com/file/d/1txVF3VxI-YvdHLYM2QKUNzALn56n2v9H/view?usp=drive_link">
+                <div class="video-thumb">02</div>
+                <div><strong>AI and symbolic work</strong><span>Research explanation · Google Drive video</span></div>
+              </a>
+              <a class="video-slot" href="https://drive.google.com/file/d/17THVFpTkA0tcn0Vp2MzjAF2kh3AQNtWI/view?usp=sharing">
+                <div class="video-thumb">03</div>
+                <div><strong>Practitioner bridge</strong><span>Writing to classroom use · Google Drive video</span></div>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="press">
+        <div class="section-head">
+          <div class="section-kicker">Press</div>
+          <h2>The vocabulary is traveling.</h2>
+        </div>
+        <p class="lede">In July 2026, EdSurge published a practitioner account of one school's response to generative AI and reached for <em>unproductive success</em> to name what it was seeing. The citation is worth noting less as press than as evidence: a concept built for the qualifying paper turned out to be useful to educators describing their own classrooms.</p>
+        <figure class="press-quote">
+          <blockquote>The students had technically succeeded while learning very little.</blockquote>
+          <figcaption>
+            Pattie Morales, attributing <em>unproductive success</em> to Miner &mdash; <cite>How My School Used Common Sense and Collaboration to Confront AI</cite>, <a href="https://www.edsurge.com/news/how-my-school-used-common-sense-and-collaboration-to-confront-ai">EdSurge</a>, July 15, 2026.
+          </figcaption>
+        </figure>
+        <div class="pub-list">
+          <article class="pub-item">
+            <h3>When the Output Looks Like Learning</h3>
+            <p>The source of record for <em>unproductive success</em> and tertiary algorithmicity. EdSurge cites the work under its qualifying-paper title, <em>Beyond Secondary Orality</em>; it was published in <em>i.e.: inquiry in education</em>, 18(1), Article 4.</p>
+            <a href="https://digitalcommons.nl.edu/ie/vol18/iss1/4">Read the article</a>
+          </article>
+          <article class="pub-item">
+            <h3>ISTE Expert Webinar</h3>
+            <p>The companion talk making the same argument for a practitioner audience: what generative AI changes about the symbolic environment of school, and why friction is the design response.</p>
+            <a href="https://minerclass.github.io/pedagogical-friction-iste-ascd-decks/iste-ew/#1">Open the deck</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="publications">
+        <div class="section-head">
+          <div class="section-kicker">Writing Links</div>
+          <h2>Publication pathways from micahminer.com.</h2>
+        </div>
+        <p class="lede">These links point back to the writing and publication areas of the main website so this GitHub hub can function as a companion map, not a replacement for the publication archive.</p>
+        <div class="pub-list">
+          <article class="pub-item">
+            <h3>Publications and Writings</h3>
+            <p>Primary publication index for articles, guest posts, media appearances, and written projects.</p>
+            <a href="https://micahminer.com/projects/">Open publication page</a>
+          </article>
+          <article class="pub-item">
+            <h3>AI Goes to School</h3>
+            <p>Book and author pathway connected to practical AI integration, leadership, and classroom use.</p>
+            <a href="https://micahminer.com/">Open main site</a>
+          </article>
+          <article class="pub-item">
+            <h3>Blog and Recent Posts</h3>
+            <p>Current public writing on AI, education, technology leadership, digital citizenship, and social studies.</p>
+            <a href="https://micahminer.com/blog/">Open blog</a>
+          </article>
+          <article class="pub-item">
+            <h3>Interactive Resume</h3>
+            <p>Portfolio context for selected projects, presentations, and public scholarship.</p>
+            <a href="https://minerclass.github.io/interactive-resume-2026/">Open portfolio</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="notes">
+        <div class="section-head">
+          <div class="section-kicker">Boundary</div>
+          <h2>What belongs here.</h2>
+        </div>
+        <p class="lede">This page is for writing-adjacent public artifacts: professional talks, practitioner resources, leadership briefs, and portfolio links. Dissertation instruments, qualifying-paper companions, and research-methods pages belong in the Dissertation Sites Dashboard instead.</p>
+      </section>
+    </main>
+
+    <footer>
+      <nav class="hub-links" aria-label="Connected hubs">
+        <a href="https://minerclass.github.io/dissertation-overview/">Dissertation Hub</a>
+        <a href="https://minerclass.github.io/conference-presentations/">Conference Hub</a>
+        <a href="https://minerclass.github.io/games-hub/">Games Hub</a>
+        <a href="https://minerclass.github.io/">All hubs</a>
+      </nav>
+      Micah J. Miner - Public writing, talks, and practitioner-scholarship sites - Updated September 2026
+    </footer>
+  </div>
+
+  <script>
+    const categories = ["All", "Writing", "Talks", "Leadership", "Tools"];
+    const sites = [
+      {
+        title: "After the Ban: What District Leaders Must Put on the Next Agenda",
+        kind: "Writing",
+        live: "https://minerclass.github.io/screen-time-wrong-question/after-the-ban/",
+        repo: "https://github.com/minerclass/screen-time-wrong-question/tree/main/after-the-ban",
+        summary: "Interactive leadership companion examining the instructional work that remains after a device restriction: assessment design, student access, approved-tool defaults, and district follow-through.",
+        use: "Use the illustrative history, science, and writing sequences, six leadership commitments, and private agenda builder to plan a cabinet discussion. Review implementation, participation, and learning separately.",
+        tags: ["leadership", "phone policy", "device restrictions", "assessment", "student access", "AI governance", "pedagogical friction", "agenda builder"]
+      },
+      {
+        title: "The Pouch and the Bypass",
+        kind: "Writing",
+        live: "https://minerclass.github.io/screen-time-wrong-question/pouch-and-bypass/",
+        repo: "https://github.com/minerclass/screen-time-wrong-question/tree/main/pouch-and-bypass",
+        secondary: "https://micahminer.com/blog/",
+        secondaryLabel: "Read the fall essay",
+        summary: "Interactive Fall 2026 companion comparing Jared Cooney Horvath, Jonathan Haidt, Candice Odgers, and Stefan Bauschard while widening the policy frame from phones to school-issued devices and platforms.",
+        use: "Use to compare four lenses, examine take-home 1:1 and classroom-cart policies, distinguish policy announcements from outcome evidence, and open a six-question district leadership conversation.",
+        tags: ["fall 2026", "screen time", "phone policy", "school devices", "Candice Odgers", "technoskepticism", "pedagogical friction"]
+      },
+      {
+        title: "K–12 Device Policy & Pedagogical Friction Evidence Hub",
+        kind: "Writing",
+        live: "https://minerclass.github.io/k12-device-policy-evidence-hub/",
+        repo: "https://github.com/minerclass/k12-device-policy-evidence-hub",
+        secondary: "https://minerclass.github.io/screen-time-wrong-question/pouch-and-bypass/",
+        secondaryLabel: "The companion essay",
+        summary: "Evidence clearinghouse behind the fall screen-policy argument: benchmark meta-analyses, natural experiments, and district policy comparisons on phone bans, 1:1 rollouts, and cart reversals, with a six-question audit districts can run on their own policy.",
+        use: "Use to check a policy claim against the meta-analytic record, run the six-question audit before a board decision, and separate an infrastructural change from an instructional one.",
+        tags: ["evidence matrix", "device policy", "phone bans", "1:1 laptops", "policy audit", "meta-analysis", "pedagogical friction"]
+      },
+      {
+        title: "The Friction Audit: What Your Phone Policy Cannot Do",
+        kind: "Talks",
+        live: "https://minerclass.github.io/pd365-friction-audit/",
+        repo: "https://github.com/minerclass/pd365-friction-audit",
+        secondary: "https://pd365.net/professional-learning-opportunities/upcoming-conferences-workshops/category/live-online-and-on-demand-recorded/event/2026/10/27/what-your-phone-policy-cannot-do-the-friction-audit-with-micah-miner",
+        secondaryLabel: "Register through PD365",
+        summary: "Three-hour PD365 workshop for Illinois district teams implementing Public Act 104-0657, built on the fact that the statute regulates personal devices and exempts school-issued ones by definition. Full session deck with four activities, a policy-to-practice crosswalk, and an annotated Illinois source set.",
+        use: "Use to audit a draft phone policy across five channels, separate implementation from access from learning before claiming a result, and leave a cabinet meeting with a board-ready rationale and a named owner.",
+        tags: ["fall 2026", "Illinois", "Public Act 104-0657", "phone policy", "ISBE model policy", "1:1 devices", "generative AI", "pedagogical friction", "PD365"]
+      },
+      {
+        title: "Designing with Friction: Summer Research Series",
+        kind: "Writing",
+        live: "https://micahminer.com/summer-research-series/",
+        secondary: "https://micahminer.com/consulting/",
+        secondaryLabel: "Speaking and consulting",
+        summary: "A public research-to-practice writing sequence on generative AI, durable learning, assessment, and K-12 leadership.",
+        use: "Follow the 10-week Summer 2026 sequence and connect its practical frameworks to speaking, workshops, and leadership conversations.",
+        tags: ["summer series", "generative AI", "durable learning", "assessment", "K-12 leadership"]
+      },
+      {
+        title: "Keeper of the Word",
+        kind: "Tools",
+        live: "https://minerclass.github.io/orality_game/",
+        repo: "https://github.com/minerclass/orality_game",
+        summary: "Interactive public-scholarship experience that carries one message through five media conditions, from primary orality to tertiary algorithmicity.",
+        use: "Experience the media ecology argument and inspect how each symbolic environment changes memory, authorship, and meaning.",
+        tags: ["interactive", "Ong", "media ecology", "tertiary algorithmicity"]
+      },
+      {
+        title: "Friction Lab",
+        kind: "Tools",
+        live: "https://minerclass.github.io/friction-game/",
+        repo: "https://github.com/minerclass/friction-game",
+        summary: "Interactive calibration activity for distinguishing productive challenge from exclusionary barriers in AI-supported learning.",
+        use: "Apply the pedagogical friction argument by making and defending design judgments across realistic cases.",
+        tags: ["interactive", "pedagogical friction", "productive struggle", "equity"]
+      },
+      {
+        title: "When the Output Looks Like Learning Article Companion",
+        kind: "Writing",
+        live: "https://minerclass.github.io/When-Output-Looks-Like-Learning/",
+        repo: "https://github.com/minerclass/When-Output-Looks-Like-Learning",
+        summary: "Digital companion to the published i.e.: inquiry in education article on tertiary algorithmicity, unproductive success, and pedagogical friction in K-12 schools.",
+        use: "Use as the article-facing entry point for public scholarship, citations, and reader-friendly exploration of the argument.",
+        tags: ["article", "NLU", "tertiary algorithmicity", "pedagogical friction"]
+      },
+      {
+        title: "When the Output Looks Like Learning Conference Deck",
+        kind: "Talks",
+        live: "https://minerclass.github.io/nlu_ai-ed-conference-pres26/",
+        repo: "https://github.com/minerclass/nlu_ai-ed-conference-pres26",
+        summary: "National Louis University virtual AI conference deck on tertiary algorithmicity, unproductive success, and pedagogical friction in K-12 schools.",
+        use: "Use as the AI conference anchor deck, separate from the social studies summer presentation pages.",
+        tags: ["NLU", "AI conference", "pedagogical friction", "virtual session"]
+      },
+      {
+        title: "Teaching Social Studies in the Age of AI",
+        kind: "Talks",
+        live: "https://minerclass.github.io/nlu_ai-ed-conference-pres26/social-studies/",
+        repo: "https://github.com/minerclass/nlu_ai-ed-conference-pres26/tree/main/social-studies",
+        summary: "Summer social studies presentation deck on generative AI, civic reasoning, C.O.R.E., H.E.A.R.T., and democratic learning.",
+        use: "Use for social studies-specific talks, summer workshops, and civic education writing.",
+        tags: ["social studies", "AI", "C.O.R.E.", "H.E.A.R.T."]
+      },
+      {
+        title: "The Frictionless Citizen",
+        kind: "Talks",
+        live: "https://minerclass.github.io/nlu_ai-ed-conference-pres26/aaacs-frictionless-citizen/",
+        repo: "https://github.com/minerclass/nlu_ai-ed-conference-pres26/tree/main/aaacs-frictionless-citizen",
+        summary: "AAACS conference session on civic agency, AI, and the danger of frictionless symbolic production in democratic education.",
+        use: "Use for AAACS conference follow-up, civic education writing, and social studies AI presentations.",
+        tags: ["AAACS", "social studies", "civic agency", "AI"]
+      },
+      {
+        title: "Pedagogical Importance of Friction",
+        kind: "Talks",
+        live: "https://minerclass.github.io/pedagogical-friction-iste-ascd-decks/iste-ew/",
+        repo: "https://github.com/minerclass/pedagogical-friction-iste-ascd-decks",
+        summary: "ISTE+ASCD expert webinar edition on protecting real learning when AI makes schoolwork easier to complete.",
+        use: "Use for practitioner-facing writing, webinar follow-up, or professional learning.",
+        tags: ["AI", "friction", "webinar", "ISTE ASCD"]
+      },
+      {
+        title: "Pedagogical Friction Practitioner Edition",
+        kind: "Writing",
+        live: "https://minerclass.github.io/pedagogical-friction-iste-ascd-decks/practitioner/",
+        repo: "https://github.com/minerclass/pedagogical-friction-iste-ascd-decks",
+        summary: "Practitioner-oriented version of the friction argument, framed for classroom and district use rather than dissertation review.",
+        use: "Use when translating scholarly ideas into educator-facing language.",
+        tags: ["practitioner", "AI", "learning", "friction"]
+      },
+      {
+        title: "Screen Practice Compass",
+        kind: "Tools",
+        live: "https://minerclass.github.io/screen-practice-compass/",
+        repo: "https://github.com/minerclass/screen-practice-compass",
+        summary: "Interactive tool that shifts screen-time conversations from minutes to the actual practices students rehearse on screens.",
+        use: "Use for writing and workshops about technology use, attention, and developmental practice.",
+        tags: ["screens", "practice", "families", "technology"]
+      },
+      {
+        title: "BPD3 Technology Department Review",
+        kind: "Leadership",
+        live: "https://minerclass.github.io/bpd3-tech-review/",
+        repo: "https://github.com/minerclass/bpd3-tech-review",
+        summary: "Public technology department review summarizing major wins, gains, infrastructure work, and strategic direction.",
+        use: "Use as a district leadership and operational writing artifact.",
+        tags: ["district", "technology", "review", "leadership"]
+      },
+      {
+        title: "BPD3 Board Meeting Dashboard",
+        kind: "Leadership",
+        live: "https://minerclass.github.io/bpd3-board-meeting-dashboard/",
+        repo: "https://github.com/minerclass/bpd3-board-meeting-dashboard",
+        summary: "Board-facing dashboard artifact for translating district work into readable public information.",
+        use: "Use as a governance, board communication, and public reporting sample.",
+        tags: ["board", "dashboard", "governance", "communication"]
+      },
+      {
+        title: "Interactive Resume and Selected Projects",
+        kind: "Writing",
+        live: "https://minerclass.github.io/interactive-resume-2026/",
+        repo: "https://github.com/minerclass/interactive-resume-2026",
+        summary: "Portfolio hub connecting public scholarship, leadership work, and selected interactive projects.",
+        use: "Use as the broad public entry point into the project ecosystem.",
+        tags: ["portfolio", "resume", "public scholarship", "projects"]
+      },
+      {
+        title: "Technoskepticism Primer",
+        kind: "Writing",
+        live: "https://minerclass.github.io/technoskepticism-primer/",
+        repo: "https://github.com/minerclass/technoskepticism-primer",
+        summary: "Reusable primer on technoskepticism: the five technoskeptical questions (Civics of Technology), their Postman roots, and a pedagogical-friction overlay, with an applied stance for AI governance, curriculum, and equity.",
+        use: "Use as a reusable definition page for AI governance, pedagogical friction, and media ecology essays.",
+        tags: ["technoskepticism", "Postman", "Civics of Technology", "AI governance"]
+      }
+    ];
+
+    let activeCategory = "All";
+    const filters = document.getElementById("filters");
+    const grid = document.getElementById("siteGrid");
+    const searchInput = document.getElementById("searchInput");
+    const emptyState = document.getElementById("emptyState");
+    const resultCount = document.getElementById("resultCount");
+
+    function normalize(value) {
+      return String(value || "").toLowerCase();
+    }
+
+    function matches(site, query) {
+      const haystack = [site.title, site.kind, site.summary, site.use, site.tags.join(" ")].map(normalize).join(" ");
+      return haystack.includes(normalize(query));
+    }
+
+    function renderFilters() {
+      filters.innerHTML = categories.map((category) => {
+        return `<button class="chip ${category === activeCategory ? "active" : ""}" type="button" data-category="${category}" aria-pressed="${category === activeCategory}">${category}</button>`;
+      }).join("");
+    }
+
+    function renderSites() {
+      const query = searchInput.value.trim();
+      const visible = sites.filter((site) => {
+        const categoryMatch = activeCategory === "All" || site.kind === activeCategory;
+        return categoryMatch && matches(site, query);
+      });
+
+      emptyState.classList.toggle("show", visible.length === 0);
+      resultCount.textContent = visible.length === sites.length
+        ? `Showing all ${sites.length} sites`
+        : `Showing ${visible.length} of ${sites.length} sites`;
+      grid.innerHTML = visible.map((site, index) => `
+        <article class="card" data-kind="${site.kind}">
+          <div class="card-body">
+            <div class="meta">
+              <span class="tag live">Live</span>
+              <span class="tag">${String(index + 1).padStart(2, "0")}</span>
+              <span class="tag">${site.kind}</span>
+            </div>
+            <h3>${site.title}</h3>
+            <p>${site.summary}</p>
+            <div class="best-use">Best use</div>
+            <p>${site.use}</p>
+            <div class="meta">${site.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}</div>
+            <div class="card-actions">
+              <a class="btn primary" href="${site.live}">Open site</a>
+              <a class="btn" href="${site.secondary || site.repo}">${site.secondaryLabel || "View source"}</a>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    filters.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-category]");
+      if (!button) return;
+      activeCategory = button.dataset.category;
+      renderFilters();
+      renderSites();
+    });
+
+    searchInput.addEventListener("input", renderSites);
+    renderFilters();
+    renderSites();
+</script>
+</body>
+</html>
